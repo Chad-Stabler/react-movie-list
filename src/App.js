@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import MovieForm from './MovieForm';
+import MovieList from './MovieList';
 
 function App() {
   const [allMovies, setAllMovies] = useState([]);
@@ -16,7 +17,6 @@ function App() {
     const newMovie = { title: movieFormTitle, color: movieFormColor, director: movieFormDirector, year: movieFormYearReleased };
 
     allMovies.push(newMovie);
-
     setAllMovies(allMovies.slice());
 
   }
@@ -36,7 +36,7 @@ function App() {
         setMovieFormDirector={setMovieFormDirector}
         handleSubmit={handleSubmit} />
       <div className='movie-list'>
-        {/* <MovieList /> */}
+        <MovieList movies={visibleMovies}/>
       </div>
     </div>
   ); 
