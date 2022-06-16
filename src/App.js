@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import MovieForm from './MovieForm';
 import MovieList from './MovieList';
@@ -10,9 +10,27 @@ function App() {
   const [movieFormTitle, setMovieFormTitle] = useState('');
   const [movieFormColor, setMovieFormColor] = useState('lightgreen');
   const [movieFormDirector, setMovieFormDirector] = useState('');
+  const [filter, setFilter] = useState('');
+
+  function handleMovieFilter(filter) {
+    setFilter(filter);
+
+    const updatedMovies = allMovies.filter(movie => movie.movieFormTitle.toLowerCase().includes(filter.toLowerCase()));
+
+    setVisibleMovies(updatedMovies);
+    setMovieFormColor('lightgreen');
+    setMovieFormDirector('');
+    setMovieFormTitle('');
+    setMovieFormYearReleased('');
+  }
+
+  useEffect(() => {
+    setVisibleMovies(allMovies);
+    setFilter('');
+  }, [allMovies]);
 
   function handleDelete(movieFormTitle) {
-    const index = allMovies.findIndex(title => title === movieFormTitle);
+    const index = allMovies.findIndex(movie => movie.movieFormTitle === movieFormTitle);
     allMovies.splice(index, 1);
 
     setAllMovies([...allMovies]);
@@ -23,9 +41,9 @@ function App() {
 
     const newMovie = { movieFormTitle: movieFormTitle, movieFormColor: movieFormColor, movieFormDirector: movieFormDirector, movieFormYearReleased: movieFormYearReleased };
 
-    allMovies.push(newMovie);
-    setAllMovies(allMovies.slice());
-    console.log(allMovies);
+    const updatedMovies = [...allMovies, newMovie];
+
+    setAllMovies(updatedMovies);
   }
   return (
     <div className="App">
@@ -42,8 +60,12 @@ function App() {
         setMovieFormTitle={setMovieFormTitle}
         setMovieFormDirector={setMovieFormDirector}
         handleSubmit={handleSubmit} />
+      <div className='filter'>
+        Search your movies:
+        <input value={filter} onChange={e => handleMovieFilter(e.target.value)} />
+      </div> 
       <div className='movie-list'>
-        <MovieList movies={allMovies} handleDelete={handleDelete}/>
+        <MovieList movies={visibleMovies} handleDelete={handleDelete}/>
       </div>
     </div>
   ); 
