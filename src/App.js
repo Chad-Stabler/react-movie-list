@@ -7,10 +7,17 @@ function App() {
   const [visibleMovies, setVisibleMovies] = useState(allMovies);
   const [movieFormYearReleased, setMovieFormYearReleased] = useState('');
   const [movieFormTitle, setMovieFormTitle] = useState('');
-  const [movieFormColor, setMovieFormColor] = useState('');
+  const [movieFormColor, setMovieFormColor] = useState('lightgreen');
   const [movieFormDirector, setMovieFormDirector] = useState('');
 
   function handleSubmit(e) {
+    e.preventDefault();
+
+    const newMovie = { title: movieFormTitle, color: movieFormColor, director: movieFormDirector, year: movieFormYearReleased };
+
+    allMovies.push(newMovie);
+
+    setAllMovies(allMovies.slice());
 
   }
   return (
@@ -28,6 +35,9 @@ function App() {
         setMovieFormTitle={setMovieFormTitle}
         setMovieFormDirector={setMovieFormDirector}
         handleSubmit={handleSubmit} />
+      <div className='movie-list'>
+        {/* <MovieList /> */}
+      </div>
     </div>
   ); 
 }

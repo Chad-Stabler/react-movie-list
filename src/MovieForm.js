@@ -1,13 +1,15 @@
+import Movie from './Movie';
+
 export default function MovieForm({ movieFormTitle, movieFormColor, movieFormDirector, movieFormYearReleased, setMovieFormTitle, setMovieFormColor, setMovieFormDirector, setMovieFormYearReleased, handleSubmit }) {
   return (<div className="form-display">
     <div className="form">
       <form onSubmit={handleSubmit}>
         <label>
-        title:
-          <input value={movieFormTitle} onChange={e => setMovieFormTitle(e.target.value)} />
+        title:  
+          <input required value={movieFormTitle} onChange={e => setMovieFormTitle(e.target.value)} />
         </label>
         <label>
-        Color:
+        Color:  
           <select value={movieFormColor} onChange={e => setMovieFormColor(e.target.value)} >
             <option value={'lightgreen'}>Green</option>
             <option value={'red'}>Red</option>
@@ -17,22 +19,16 @@ export default function MovieForm({ movieFormTitle, movieFormColor, movieFormDir
           </select>
         </label>
         <label>
-        Director:
-          <input value={movieFormDirector} onChange={e => setMovieFormDirector(e.target.value)} />
+        Director:  
+          <input required value={movieFormDirector} onChange={e => setMovieFormDirector(e.target.value)} />
         </label>
         <label>
-        Year Year Released
-          <input value={movieFormYearReleased} onChange={e => setMovieFormYearReleased(e.target.value)} />
+        Year Released:  
+          <input required value={movieFormYearReleased} onChange={e => setMovieFormYearReleased(e.target.value)} />
         </label>
         <button>Add to your watchlist</button>
       </form>
-    </div>
-    <div className="preview-card" style={{ background: movieFormColor }}>
-      <div className="poster">
-        <h2>{movieFormTitle}</h2>
-        <h3>by {movieFormDirector}</h3>
-        <h4>Released in {movieFormYearReleased}</h4>
-      </div>
+      <Movie movieFormColor={movieFormColor} movieFormDirector={movieFormDirector} movieFormTitle={movieFormTitle} movieFormYearReleased={movieFormYearReleased} />
     </div>
   </div>);
 }

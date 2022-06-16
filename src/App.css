@@ -50,7 +50,8 @@ body, html, #root, .App {
 .form {
   margin: 5px;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .form form {
@@ -61,6 +62,12 @@ body, html, #root, .App {
   align-items: flex-start;
 }
 
-.form label {
+.form label, .form input, .form select {
+  margin: 5px;
+}
+
+.preview-card {
+  width: 150px;
+  height: 200px;
   margin: 5px;
 }
