@@ -74,10 +74,11 @@ body, html, #root, .App {
 
 .movies {
   background-color: cadetblue;
+  padding: 5px;
   height: 50%;
 }
 
-.movies Movie {
+.poster {
   width: 150px;
   height: 200px;
   margin: 5px;
